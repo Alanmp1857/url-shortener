@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7f4">
+    <title>Create your account | Short URLs</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #17231d;
+            background: #f5f7f4;
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            padding: 48px 24px;
+            background:
+                radial-gradient(ellipse at 12% 8%, rgba(196, 228, 185, 0.34), transparent 34%),
+                #f5f7f4;
+        }
+
+        .page {
+            width: min(100%, 1040px);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 24px 4px;
+            color: #17231d;
+            font-size: 15px;
+            font-weight: 750;
+            letter-spacing: -0.035em;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 30px;
+            height: 30px;
+            place-items: center;
+            border-radius: 9px;
+            background: #c5f36c;
+            color: #17231d;
+        }
+
+        .brand-mark svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .card {
+            display: grid;
+            grid-template-columns: 0.92fr 1.08fr;
+            min-height: 590px;
+            overflow: hidden;
+            border: 1px solid #e8ece6;
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: 0 24px 70px rgba(28, 43, 33, 0.09);
+        }
+
+        .intro {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            padding: 48px 42px 38px;
+            background: #18251e;
+            color: #f4f7f1;
+        }
+
+        .intro::before,
+        .intro::after {
+            position: absolute;
+            width: 290px;
+            height: 290px;
+            border: 1px solid rgba(197, 243, 108, 0.12);
+            border-radius: 50%;
+            content: "";
+            pointer-events: none;
+        }
+
+        .intro::before {
+            right: -155px;
+            bottom: 56px;
+        }
+
+        .intro::after {
+            right: -112px;
+            bottom: 13px;
+        }
+
+        .eyebrow {
+            margin: 0;
+            color: #c5f36c;
+            font-size: 11px;
+            font-weight: 750;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .intro-copy {
+            position: relative;
+            z-index: 1;
+            margin: 48px 0 30px;
+        }
+
+        .intro h2 {
+            max-width: 340px;
+            margin: 0;
+            font-size: clamp(32px, 4vw, 46px);
+            font-weight: 650;
+            letter-spacing: -0.055em;
+            line-height: 1.08;
+        }
+
+        .intro-copy > p {
+            max-width: 330px;
+            margin: 18px 0 0;
+            color: #b6c1b9;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .link-preview {
+            position: relative;
+            z-index: 1;
+            max-width: 340px;
+            padding: 17px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.055);
+            backdrop-filter: blur(8px);
+        }
+
+        .preview-label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin: 0 0 12px;
+            color: #aab8ad;
+            font-size: 11px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #c5f36c;
+            box-shadow: 0 0 10px rgba(197, 243, 108, 0.5);
+        }
+
+        .preview-link {
+            color: #d7f6a8;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+        }
+
+        .preview-destination {
+            overflow: hidden;
+            margin: 6px 0 0;
+            color: #95a399;
+            font-size: 11px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .intro-footnote {
+            position: relative;
+            z-index: 1;
+            margin: 26px 0 0;
+            color: #92a096;
+            font-size: 11px;
+        }
+
+        .form-panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 54px 58px;
+        }
+
+        .form-content {
+            width: min(100%, 360px);
+        }
+
+        .form-content h1 {
+            margin: 0;
+            color: #17231d;
+            font-size: 31px;
+            font-weight: 680;
+            letter-spacing: -0.045em;
+        }
+
+        .subtitle {
+            margin: 9px 0 30px;
+            color: #748078;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #303d35;
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        input {
+            width: 100%;
+            height: 46px;
+            padding: 0 13px;
+            border: 1px solid #dfe5df;
+            border-radius: 9px;
+            outline: none;
+            background: #fff;
+            color: #17231d;
+            font: inherit;
+            font-size: 13px;
+            transition: border-color 150ms ease, box-shadow 150ms ease;
+        }
+
+        input::placeholder {
+            color: #a4ada6;
+        }
+
+        input:focus {
+            border-color: #83b83b;
+            box-shadow: 0 0 0 3px rgba(197, 243, 108, 0.28);
+        }
+
+        .submit {
+            display: flex;
+            width: 100%;
+            min-height: 48px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+            border: 0;
+            border-radius: 9px;
+            background: #c5f36c;
+            color: #1c2a20;
+            cursor: pointer;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 750;
+            transition: background 150ms ease, transform 150ms ease;
+        }
+
+        .submit:hover {
+            transform: translateY(-1px);
+            background: #b8e85e;
+        }
+
+        .submit:focus-visible,
+        .brand:focus-visible,
+        .home-link:focus-visible {
+            outline: 3px solid #83b83b;
+            outline-offset: 3px;
+        }
+
+        .form-footer {
+            margin: 22px 0 0;
+            color: #858f88;
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .home-link {
+            color: #425d32;
+            font-weight: 650;
+            text-decoration: none;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        @media (max-width: 760px) {
+            body {
+                padding: 28px 16px;
+            }
+
+            .page {
+                width: min(100%, 520px);
+            }
+
+            .card {
+                grid-template-columns: 1fr;
+            }
+
+            .intro {
+                min-height: 315px;
+                padding: 30px;
+            }
+
+            .intro-copy {
+                margin: 30px 0 24px;
+            }
+
+            .intro h2 {
+                max-width: 430px;
+                font-size: 35px;
+            }
+
+            .intro-copy > p {
+                margin-top: 12px;
+            }
+
+            .link-preview,
+            .intro-footnote {
+                display: none;
+            }
+
+            .form-panel {
+                padding: 38px 30px 42px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <a class="brand" href="/" aria-label="Short URLs home">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M10 13.5 14 9.5m-6.5 6.5-1 1a3.18 3.18 0 0 1-4.5-4.5l4-4a3.18 3.18 0 0 1 4.5 0m3.5 2 1-1a3.18 3.18 0 0 1 4.5 4.5l-4 4a3.18 3.18 0 0 1-4.5 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+            Short URLs
+        </a>
+
+        <section class="card" aria-label="Create your account">
+            <aside class="intro">
+                <p class="eyebrow">Make every link count</p>
+                <div class="intro-copy">
+                    <h2>Short links.<br>Big possibilities.</h2>
+                    <p>Bring your links together and make sharing the easy part.</p>
+                </div>
+                <div class="link-preview" aria-hidden="true">
+                    <p class="preview-label"><span class="status-dot"></span>Your links, ready to go</p>
+                    <div class="preview-link">short.url/your-next-idea</div>
+                    <p class="preview-destination">yourwebsite.com/a-great-place-to-start</p>
+                </div>
+                <p class="intro-footnote">Simple links. A little more room to grow.</p>
+            </aside>
+
+            <div class="form-panel">
+                <div class="form-content">
+                    <h1>Create your account</h1>
+                    <p class="subtitle">Get started with your own space for shorter links.</p>
+
+                    <form action="/user/signup" method="POST">
+                        <div class="field">
+                            <label for="name">Name</label>
+                            <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email address</label>
+                            <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+                        </div>
+                        <div class="field">
+                            <label for="password">Password</label>
+                            <input id="password" name="password" type="password" placeholder="Create a password" autocomplete="new-password" required>
+                        </div>
+                        <button class="submit" type="submit">Create account</button>
+                    </form>
+
+                    <p class="form-footer">Already have an account? <a class="home-link" href="/login">Log in</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

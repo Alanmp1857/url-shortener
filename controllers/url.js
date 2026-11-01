@@ -6,8 +6,8 @@ async function handleGenerateNewShortURL(req, res) {
 
     const { nanoid } = await import('nanoid');
     const shortId = nanoid(8);
-    const url = await URL.create({ shortId, redirectUrl: body.url, visitHistory: [] });
-    return res.status(201).json({ shortId, redirectUrl: url.redirectUrl, visitHistory: url.visitHistory });
+    await URL.create({ shortId, redirectUrl: body.url, visitHistory: [], createdBy: req.user._id });
+    return res.redirect("/");
 }
 
 async function handleGetAnalytics(req,res) {

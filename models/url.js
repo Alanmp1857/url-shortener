@@ -17,7 +17,11 @@ const urlSchema = new mongoose.Schema({
                 default: new Date(new Date().toISOString())
             }
         }
-    ]
+    ],
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users"
+    }
 }, {
     timestamps: true
 });
